@@ -1,0 +1,22 @@
+{
+  "name": "drivethrul-lib",
+  "version": "1.0.0",
+  "description": "drive thru library application API",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ovisannn/drivethrul-lib.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ovisannn/drivethrul-lib/issues"
+  },
+  "homepage": "https://github.com/ovisannn/drivethrul-lib#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
