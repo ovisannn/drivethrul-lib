@@ -11,14 +11,6 @@ import { UserHandler } from './model/handler/user.js'
 import { UserUsecase } from './business/user.js'
 import { UserController } from './controllers/userController.js'
 
-import { VideoUsecase } from './business/video.js'
-import { VideoController } from './controllers/videoController.js'
-import { VideoHandler } from './model/handler/video.js'
-
-import { ProductHandler } from './model/handler/product.js'
-import { ProductUsecase } from './business/product.js'
-import { ProductController } from './controllers/productController.js'
-
 import morgan from 'morgan'
 import { BookHandler } from './model/handler/book.js'
 import { BookUsecase } from './business/book.js'
@@ -42,16 +34,6 @@ app.use(
   const userHandler = new UserHandler()
   const userUsecase = new UserUsecase(userHandler)
   const userController = new UserController(userUsecase)
-  
-  //video
-  const videoHandler = new VideoHandler()
-  const videoUsecase = new VideoUsecase(videoHandler)
-  const videoController = new VideoController(videoUsecase)
-  
-  //product
-  const productHandler = new ProductHandler()
-  const productUsecase = new ProductUsecase(productHandler)
-  const productController = new ProductController(productUsecase)
 
   //books
   const bookHandler = new BookHandler()
@@ -62,8 +44,6 @@ app.use(
   
   const controllerList = {
     user : userController,
-    video : videoController,
-    product : productController,
     book : bookController,
     authHandler : authHandler
 }
