@@ -14,4 +14,12 @@ export class AdminHandler{
         }
         return {status : 200, data : {loginAdmin}}
     }
+
+    async GetAdminByUsername(username){
+        const result = await this.model.findOne({username : username})
+        if(result === null || result === undefined){
+            return {status : 404, data : newError.UserDoesntExist.message}
+        }
+        return {status : 200, data : {result}}
+    }
 }

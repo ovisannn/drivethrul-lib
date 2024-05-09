@@ -40,7 +40,8 @@ export class UserUsecase{
             return {status : 401, data : newError.InvalidCredentials.message}
         }
         //sign token
-        const token = Jwt.sign(result.data, process.env.TOKEN_SEC, {expiresIn : process.env.AUTH_TIMEOUT})
+        const uname = {username : result.data.loginUser.username}
+        const token = Jwt.sign(uname, process.env.TOKEN_SEC, {expiresIn : process.env.AUTH_TIMEOUT})
         // console.log(typeof(token))
         return {status : 200, data : {token : token, username : result.data.loginUser.username}}
     }

@@ -10,12 +10,16 @@ export const BookSchema = mongoose.Schema({
     longDescription : String,
     status : String,
     authors : [String],
-    categories : [String]
+    categories : [String],
+    copy : [{
+        "id" : String,
+        "status" : String
+    }]
 })
 
 export class Book{
     constructor(data){
-        this._id = data._id? data._id : null
+        this._id = data._id?  data._id : null
         this.title = data.title
         this.isbn = data.isbn
         this.pageCount = data.pageCount
@@ -24,6 +28,7 @@ export class Book{
         this.shortDescription = data.shortDescription
         this.longDescription = data.longDescription
         this.status = data.status
+        this.copy = data.copy
     }
 
     GetBook(){

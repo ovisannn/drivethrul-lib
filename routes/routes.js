@@ -5,10 +5,41 @@ export class Router{
     }
 
     routes(){
+        //loan ticket
+        this.app.post('/loan/ticket/create',(req, res, next) =>{
+            return this.controllerList.authHandler.CookieJwtAuth(req, res, next)
+        }, (req, res) =>{
+            return this.controllerList.bookLoan.CreateLoanTicketController(req, res)
+        })
+
+        this.app.post('/loan/return/:id',(req, res, next) =>{
+            return this.controllerList.authHandler.CookieJwtAuth(req, res, next)
+        }, (req, res)=>{
+            return this.controllerList.bookLoan.ReturnLoanBookTicketController(req, res)
+        })
+
         //book
         this.app.get('/books', (req, res) => {
             return this.controllerList.book.GetAllBooksController(req, res)
         })
+
+        this.app.get('/book/:isbn', (req, res) => {
+            return this.controllerList.book.GetBookByIsbnController(req, res)
+        })
+
+        this.app.patch('/book/:isbn', (req, res) => {
+            return this.controllerList.book.UpdateBookByIsbnController(req, res)
+        })
+
+        this.app.delete('/book/:isbn', (req, res) => {
+            return this.controllerList.book.DeleteBookByIsbnController(req, res)
+        })
+
+        this.app.post('/book/add', (req, res)=>{
+            return this.controllerList.book.InsertBookController(req, res)
+        })
+
+
         //user routes
         //register user req = {username, email, password} -> aman
         this.app.post('/user/register', (req, res)=>{

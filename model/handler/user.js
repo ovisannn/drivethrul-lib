@@ -52,13 +52,12 @@ export class UserHandler{
     }
 
     async GetUserByUsername(username){
-        const userData = await this.model.findOne({username : username})
-        const newData = new User(userData)
-        const result = newData.GetUserPublicInformation()
-        if(userData === null || userData=== undefined){
+        const loginUser = await this.model.findOne({username : username})
+        // console.log(loginUser)
+        if(loginUser === null || loginUser=== undefined){
             return {status : 404, data : newError.UserDoesntExist.message}
         }
-        return {status : 200, data : {result}}
+        return {status : 200, data : {loginUser}}
     }
 
     async CheckUsername(username){

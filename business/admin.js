@@ -24,4 +24,9 @@ export class AdminUsecase{
         // console.log(typeof(token))
         return {status : 200, data : {token : token, username : result.data.loginAdmin.username}}
     }
+
+    async GetAdminByUsername(username){
+        const result = await this.handler.GetAdminByUsername(username)
+        return result
+    }
 }

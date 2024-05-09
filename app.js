@@ -6,15 +6,19 @@ import cookieParser from 'cookie-parser'
 import { Router } from './routes/routes.js'
 import { CostumJwt } from './routes/middleware/auth.js'
 import { logger } from './helpers/logger/logger.js'
+import morgan from 'morgan'
 
 import { UserHandler } from './model/handler/user.js'
 import { UserUsecase } from './business/user.js'
 import { UserController } from './controllers/userController.js'
 
-import morgan from 'morgan'
 import { BookHandler } from './model/handler/book.js'
 import { BookUsecase } from './business/book.js'
 import { BookController } from './controllers/bookController.js'
+
+import { BookLoanHandler } from './model/handler/book_loan.js'
+import { BookLoanUsecase } from './business/bookLoan.js'
+import { BookLoanController } from './controllers/bookLoanController.js'
 
 const app = express()
 app.use(express.json());
@@ -40,11 +44,18 @@ app.use(
   const bookUsecase = new BookUsecase(bookHandler)
   const bookController = new BookController(bookUsecase)
 
+  //book Loan
+  const bookLoanHandler = new BookLoanHandler()
+  const bookLoanUsecase = new BookLoanUsecase(bookLoanHandler, userHandler, bookHandler)
+  const bookLoanController = new BookLoanController(bookLoanUsecase)
+
+  //auth
   const authHandler = new CostumJwt()
   
   const controllerList = {
     user : userController,
     book : bookController,
+    bookLoan : bookLoanController,
     authHandler : authHandler
 }
 
