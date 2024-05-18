@@ -22,4 +22,28 @@ export class BookLoanController{
         const newResponse = new BaseResponse(result.status, result.data)
         return res.status(newResponse.GetStatus()).json(newResponse.GetResponse())
     }
+
+    async ConfirmLoanController(req, res){
+        const reqs = req.params.id
+        const result = await this.usecase.ConfirmLoan(reqs)
+
+        const newResponse = new BaseResponse(result.status, result.data)
+        return res.status(newResponse.GetStatus()).json(newResponse.GetResponse())
+    }
+
+    async PickUpBookController(req, res){
+        const reqs = req.params.id
+        const result = await this.usecase.PickUpBook(reqs)
+
+        const newResponse = new BaseResponse(result.status, result.data)
+        return res.status(newResponse.GetStatus()).json(newResponse.GetResponse())
+    }
+
+    async GetLoanTicketById(req, res){
+        const reqs = req.params.id
+        const result = await this.usecase.GetLoanTicketById(reqs)
+
+        const newResponse = new BaseResponse(result.status, result.data)
+        return res.status(newResponse.GetStatus()).json(newResponse.GetResponse())
+    }
 }

@@ -6,16 +6,39 @@ export class Router{
 
     routes(){
         //loan ticket
+        //ok
         this.app.post('/loan/ticket/create',(req, res, next) =>{
             return this.controllerList.authHandler.CookieJwtAuth(req, res, next)
         }, (req, res) =>{
             return this.controllerList.bookLoan.CreateLoanTicketController(req, res)
         })
 
-        this.app.post('/loan/return/:id',(req, res, next) =>{
+        //ok
+        this.app.patch('/loan/ticket/:id/return',(req, res, next) =>{
             return this.controllerList.authHandler.CookieJwtAuth(req, res, next)
         }, (req, res)=>{
             return this.controllerList.bookLoan.ReturnLoanBookTicketController(req, res)
+        })
+
+        //ok
+        this.app.patch('/loan/ticket/:id/confirm',(req, res, next) => {
+            return this.controllerList.authHandler.CookieJwtAuth(req, res, next)
+        }, (req, res) => {
+            return this.controllerList.bookLoan.ConfirmLoanController(req, res)
+        })
+
+        //ok
+        this.app.patch('/loan/ticket/:id/pickup',(req, res, next) => {
+            return this.controllerList.authHandler.CookieJwtAuth(req, res, next)
+        }, (req, res) => {
+            return this.controllerList.bookLoan.PickUpBookController(req, res)
+        })
+
+        //ok
+        this.app.get('/loan/ticket/:id',(req, res, next) => {
+            return this.controllerList.authHandler.CookieJwtAuth(req, res, next)
+        }, (req, res) => {
+            return this.controllerList.bookLoan.GetLoanTicketById(req, res)
         })
 
         //book

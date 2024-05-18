@@ -74,18 +74,19 @@ export class BookLoanUsecase{
         const updateTicket = await this.handler.UpdateLoanTicket(result.data)
         //update book
 
-        const findBook = await this.bookHandler.GetBookByIsbn(insertData.isbn)
+        const findBook = await this.bookHandler.GetBookByIsbn(result.data.isbn)
         if(findBook.status != 200){
             return {status : 404, data : newError.BookDoesntExist.message}
         }
 
-        const findCopy = await this.bookHandler.GetBookCopyByIsbnAndId(insertData.isbn, insertData.copyID)
+        const findCopy = await this.bookHandler.GetBookCopyByIsbnAndId(result.data.isbn, result.data.copyID)
+        console.log(findCopy.data.copy.id)
         if(findCopy.status != 200){
             return {status : 404, data : newError.CopyDoesntExist.message}
         }
 
         findBook.data.book.copy.forEach(element => {
-            if(element.id == insertData.copyID){
+            if(element.id == findCopy.data.copy.id){
                 if(element.status == "OCCUPIED"){
                     element.status = "IN LIBRARY"
                 }}
@@ -93,5 +94,48 @@ export class BookLoanUsecase{
         const updateBook = await this.bookHandler.UpdateBookByIsbn(findBook.data.book)
 
         return {status : 200, data : null}
+    }
+
+    async ConfirmLoan(id){
+        const result = await this.handler.GetLoanTicketById(id)
+
+        if(result.data === null || result.data === undefined) {
+            return {status : 404, data : newError.LoanTicketDoesntExist.message}
+        }
+        
+        if(result.data.status === "COMPLETED"){
+            return {status : 403, data : newError.LoanAlreadyCompleted.message}
+        }
+        
+        result.data.status = "READY TO PICK UP"
+        // console.log(result)
+        //update loan ticket
+        const updateTicket = await this.handler.UpdateLoanTicket(result.data)
+        return updateTicket
+    }
+
+    async PickUpBook(id){
+        const result = await this.handler.GetLoanTicketById(id)
+
+        if(result.data === null || result.data === undefined) {
+            return {status : 404, data : newError.LoanTicketDoesntExist.message}
+        }
+
+        if(result.data.status === "COMPLETED"){
+            return {status : 403, data : newError.LoanAlreadyCompleted.message}
+        }
+
+        result.data.status = "ACTIVE"
+        //update loan ticket
+        const updateTicket = await this.handler.UpdateLoanTicket(result.data)
+        return updateTicket
+    }
+
+    async GetLoanTicketById(id) {
+        const result = await this.handler.GetLoanTicketById(id)
+        if(result.data === null || result.data === undefined) {
+            return {status : 404, data : newError.LoanTicketDoesntExist.message}
+        }
+        return {status : 200, data : result.data}
     }
 }

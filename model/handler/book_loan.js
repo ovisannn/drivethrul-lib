@@ -15,7 +15,7 @@ export class BookLoanHandler{
     }
 
     async GetLoanTicketById(id){
-        const result = await this.model.find(id)
+        const result = await this.model.findById(id)
         if(result === null || result === undefined) {
             return {status : 404, data : newError.LoanTicketDoesntExist.message}
         }
@@ -23,9 +23,9 @@ export class BookLoanHandler{
     }
 
     async UpdateLoanTicket(insertData){
-        const result = await this.model.findOneAndUpdate({id : insertData.id}, insertData, {
+        const result = await this.model.findOneAndUpdate({_id : insertData.id}, insertData, {
             new : true
         })
-        return {status: 200, data : result.isbn}
+        return {status: 200, data : result._id}
     }
 }
