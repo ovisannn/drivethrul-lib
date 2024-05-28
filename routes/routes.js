@@ -42,10 +42,12 @@ export class Router{
         })
 
         //book
+        //ok
         this.app.get('/books', (req, res) => {
             return this.controllerList.book.GetAllBooksController(req, res)
         })
 
+        //ok
         this.app.get('/book/:isbn', (req, res) => {
             return this.controllerList.book.GetBookByIsbnController(req, res)
         })
