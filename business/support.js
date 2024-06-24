@@ -37,4 +37,5 @@ export class supportUseCase{
         const result = await this.handler.GetSupportByTitle(title)
         return result
     }
+
 }

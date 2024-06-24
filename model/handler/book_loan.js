@@ -22,6 +22,14 @@ export class BookLoanHandler{
         return {status : 200, data : result}
     }
 
+    async GetLoanTicketByUsername(username){
+        const result = await this.model.find({username : username})
+        if(result === null || result === undefined) {
+            return {status : 404, data : newError.LoanTicketDoesntExist.message}
+        }
+        return {status : 200, data : result}
+    } //
+
     async UpdateLoanTicket(insertData){
         const result = await this.model.findOneAndUpdate({_id : insertData.id}, insertData, {
             new : true

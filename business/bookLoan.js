@@ -138,4 +138,12 @@ export class BookLoanUsecase{
         }
         return {status : 200, data : result.data}
     }
+
+    async GetLoanTicketByUsername(username){
+        const result = await this.handler.GetLoanTicketByUsername(username)
+        if(result.data === null || result.data === undefined) {
+            return {status : 404, data : newError.LoanTicketDoesntExist.message}
+        }
+        return {status : 200, data : result.data}
+    }
 }

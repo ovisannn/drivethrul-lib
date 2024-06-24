@@ -27,7 +27,8 @@ app.use(cookieParser())
 app.use(morgan('combined'))
 app.use(
   cors({
-    origin : "*"
+    origin : "*",
+    credentials : true
   })
   )
   

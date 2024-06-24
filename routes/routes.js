@@ -41,6 +41,12 @@ export class Router{
             return this.controllerList.bookLoan.GetLoanTicketById(req, res)
         })
 
+        this.app.get('/loan/tickets/:username', (req, res, next) => {
+            return this.controllerList.authHandler.CookieJwtAuth(req, res, next)
+        }, (req, res) => {
+            return this.controllerList.bookLoan.GetLoanTicketByUsername(req, res)
+        })
+
         //book
         //ok
         this.app.get('/books', (req, res) => {

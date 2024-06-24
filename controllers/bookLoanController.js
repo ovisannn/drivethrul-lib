@@ -46,4 +46,11 @@ export class BookLoanController{
         const newResponse = new BaseResponse(result.status, result.data)
         return res.status(newResponse.GetStatus()).json(newResponse.GetResponse())
     }
+
+    async GetLoanTicketByUsername(req, res){
+        const reqs = req.params.username
+        const result = await this.usecase.GetLoanTicketByUsername(reqs)
+        const newResponse = new BaseResponse(result.status, result.data)
+        return res.status(newResponse.GetStatus()).json(newResponse.GetResponse())
+    }
 }
