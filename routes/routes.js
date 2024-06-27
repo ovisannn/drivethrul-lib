@@ -35,15 +35,11 @@ export class Router{
         })
 
         //ok
-        this.app.get('/loan/ticket/:id',(req, res, next) => {
-            return this.controllerList.authHandler.CookieJwtAuth(req, res, next)
-        }, (req, res) => {
+        this.app.get('/loan/ticket/:id',(req, res) => {
             return this.controllerList.bookLoan.GetLoanTicketById(req, res)
         })
 
-        this.app.get('/loan/tickets/:username', (req, res, next) => {
-            return this.controllerList.authHandler.CookieJwtAuth(req, res, next)
-        }, (req, res) => {
+        this.app.get('/loan/tickets/:username', (req, res) => {
             return this.controllerList.bookLoan.GetLoanTicketByUsername(req, res)
         })
 
