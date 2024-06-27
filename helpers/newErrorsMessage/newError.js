@@ -10,6 +10,7 @@ const BookDoesntExist = new Error("Book doesn't exist")
 const CopyDoesntExist = new Error("Book copy doesn't exist")
 const CopyIsOccupied = new Error("Book copy is Occupied")
 const LoanAlreadyCompleted = new Error("loan is already completed")
+const LoanTicketDoesntExist = new Error("loan ticket does not exist")
 
 
 export default {
@@ -24,5 +25,6 @@ export default {
     BookDoesntExist,
     CopyDoesntExist,
     CopyIsOccupied,
-    LoanAlreadyCompleted
+    LoanAlreadyCompleted,
+    LoanTicketDoesntExist
 }
